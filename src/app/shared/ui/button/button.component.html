@@ -1,0 +1,12 @@
+<button
+  [class]="`rounded-2xl text-white font-semibold bg-indigo-500 hover:bg-indigo-500/90 cursor-pointer flex items-center gap-4 ${button[type()]}`"
+[ngClass]="{'opacity-50 pointer-events-none':disabled()}"
+  >
+  @if(prefixIcon()) {
+    <i [class]="`ph ${prefixIcon()}`"></i>
+  }
+  <ng-content></ng-content>
+  @if(suffixIcon()) {
+    <i [class]="`ph ${suffixIcon()}`"></i>
+  }
+</button>

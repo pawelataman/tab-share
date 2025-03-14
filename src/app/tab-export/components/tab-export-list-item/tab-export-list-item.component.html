@@ -1,0 +1,18 @@
+<div
+  class="bg-gray-500/60 flex flex-row items-center gap-4 px-6 py-2 rounded-xl my-4 cursor-pointer hover:bg-gray-500/50"
+  [ngClass]="{
+'opacity-50': excluded(),
+}">
+  <div class="flex flex-row gap-6 items-center">
+    @if (!excluded()) {
+      <i class="ph ph-check text-indigo-400 text-2xl"></i>
+    } @else {
+      <i class="ph ph-x text-indigo-400 text-2xl"></i>
+    }
+    <img [src]="tab().favIconUrl" class="h-8 w-8">
+    <div>
+      <div class="text-2xl font-semibold text-white">{{ tab().title }}</div>
+      <div class="text-xl text-gray-300">{{ tab().url }}</div>
+    </div>
+  </div>
+</div>

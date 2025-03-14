@@ -17,24 +17,33 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/tab-share",
+            "outputPath":  {
+              "base": "dist/",
+              "browser": ""
+            },
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
+            "prerender": false,
+            "ssr": false,
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "chrome"
               }
             ],
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+
           },
           "configurations": {
             "production": {
@@ -55,7 +64,9 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "prerender": false,
+              "ssr": false
             }
           },
           "defaultConfiguration": "production"

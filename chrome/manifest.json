@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Tab Share",
+  "version": "1.0.0",
+  "description": "Chrome extension that enables you to share you tabs with anyone",
+  "icons": {
+    "48": "icons/icon48.png",
+    "16": "icons/icon16.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "action": {
+    "default_popup": "index.html"
+  }
+}

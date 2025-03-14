@@ -1,0 +1,20 @@
+<div class="h-full flex flex-col">
+  <h1 class="text-white font-semibold text-4xl text-center mt-4 mb-8">Export</h1>
+  <div class="flex justify-between m-4 items-center">
+    @if ($excludedTabsCount() > 0) {
+      <app-button suffixIcon="ph-check" type="sm" (click)="selectAll()">Select all</app-button>
+    } @else {
+      <app-button suffixIcon="ph-x" type="sm" (click)="deselectAll()">Deselect all</app-button>
+    }
+    <div class="text-gray-100 text-2xl">Selected <span class="font-bold">{{ $selectedCount() }}</span></div>
+  </div>
+  <div class="grow overflow-auto px-4">
+    @for (tab of $tabs(); track tab.id) {
+      <app-tab-export-list-item [tab]="tab" (click)="onTabToggle(tab)" [excluded]="$excludedTabs()[tab.url || '']"/>
+    }
+  </div>
+  <div class="flex justify-center mt-6 mb-4">
+    <app-button suffixIcon="ph-share-network" [disabled]="$selectedCount() === 0">Export tabs</app-button>
+  </div>
+</div>
+
