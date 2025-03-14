@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, input} from '@angular/core';
-import {Tab} from '../../../core/state/models';
+import {ChromeTabWithId} from '../../../core/state/core.models';
 import {NgClass} from '@angular/common';
 
 @Component({
@@ -11,7 +11,6 @@ import {NgClass} from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabExportListItemComponent {
-  tab = input.required<Tab>()
-  selected = input<boolean>()
+  tab = input.required<ChromeTabWithId>()
   excluded = input<boolean>(false)
 }

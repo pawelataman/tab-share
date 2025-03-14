@@ -3,16 +3,17 @@
   [ngClass]="{
 'opacity-50': excluded(),
 }">
-  <div class="flex flex-row gap-6 items-center">
+  
+  <div class="flex flex-row gap-6 items-center overflow-hidden">
     @if (!excluded()) {
-      <i class="ph ph-check text-indigo-400 text-2xl"></i>
+      <i class="ph-bold ph-check text-indigo-400 text-2xl"></i>
     } @else {
-      <i class="ph ph-x text-indigo-400 text-2xl"></i>
+      <i class="ph-bold ph-x text-indigo-400 text-2xl"></i>
     }
     <img [src]="tab().favIconUrl" class="h-8 w-8">
     <div>
-      <div class="text-2xl font-semibold text-white">{{ tab().title }}</div>
-      <div class="text-xl text-gray-300">{{ tab().url }}</div>
+      <div class="text-2xl font-semibold text-white whitespace-nowrap">{{ tab().title }}</div>
+      <div class="text-xl w-full text-gray-300 whitespace-nowrap">{{ tab().url }}</div>
     </div>
   </div>
 </div>

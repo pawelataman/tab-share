@@ -9,11 +9,12 @@ type SizeVariants = 'sm' | 'md' | 'lg'
     NgClass
   ],
   templateUrl: './button.component.html',
+  styleUrl: './button.component.scss'
 })
 export class ButtonComponent {
   prefixIcon = input<string>()
   suffixIcon = input<string>()
-  type = input<SizeVariants>('md')
+  size = input<SizeVariants>('md')
   disabled = input<boolean>(false)
 
   button: { [P in SizeVariants]: string } = {

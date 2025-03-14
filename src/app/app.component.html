@@ -1,4 +1,9 @@
-<div class="absolute h-full w-full bg-gray-950 p-4">
+<div class="absolute h-full w-full bg-gray-900 p-4">
   <router-outlet/>
+  @if ($isLoading()) {
+    <div class="absolute h-full w-full inset-0 flex justify-center items-center bg-gray-900/90">
+      <div class="text-indigo-500 text-6xl">Loading</div>
+    </div>
+  }
 </div>
 

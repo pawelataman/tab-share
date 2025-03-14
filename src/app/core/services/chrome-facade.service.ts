@@ -1,13 +1,15 @@
-import {Injectable, resource} from '@angular/core';
-import {Tab} from '../state/models';
+import {Injectable} from '@angular/core';
+import {ChromeTabWithId} from '../state/core.models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChromeFacadeService {
 
-  $tabsResource = resource({
-    defaultValue: [],
-    loader: (): Promise<Tab[]> => chrome.tabs.query({currentWindow: true})
-  })
+  getCurrentWindowTabs(): Promise<ChromeTabWithId[]> {
+    return chrome.tabs.query({currentWindow: true}).then(tabs => tabs.map(tab => ({
+      ...tab,
+      id: String(tab.id ?? tab.index)
+    } as ChromeTabWithId)))
+  }
 }

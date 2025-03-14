@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
+import {CoreStore} from './core/state/core.state';
 
 
 @Component({
@@ -10,4 +11,5 @@ import {RouterOutlet} from '@angular/router';
   ]
 })
 export class AppComponent {
+  $isLoading = inject(CoreStore).isLoading
 }

@@ -1,17 +1,17 @@
-@import "tailwindcss";
-@import "@phosphor-icons/web/light";
-@import "@phosphor-icons/web/regular";
-@import "@phosphor-icons/web/bold";
+@use "tailwindcss";
+@use "@phosphor-icons/web/light";
+@use "@phosphor-icons/web/regular";
+@use "@phosphor-icons/web/bold";
 
 html {
   font-size: 10px;
-  background-color: black;
+  background-color: #1e0039;
 }
 
 body {
   width: 700px;
   height: 500px;
-  background-color: black;
+  background-color: #1e0039;
 }
 
 * {
