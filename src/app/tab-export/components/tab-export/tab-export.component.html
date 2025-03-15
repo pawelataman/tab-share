@@ -1,5 +1,11 @@
 <div class="h-full flex flex-col">
-  <h1 class="text-white font-semibold text-4xl text-center mt-4 mb-8">Export</h1>
+  <div>
+    <div class="text-white font-semibold text-4xl text-center mt-4 mb-8">Export&nbsp;<span
+      class="font-semibold px-2 py-1 bg-indigo-500 rounded-xl text-white">{{ $selectedCount() }}</span>
+      tab{{ $selectedCount() === 1 ? '' : 's' }}
+    </div>
+    <div class="text-indigo-500 font-semibold text-4xl text-center">Import <i class="ph-bold ph-import"></i></div>
+  </div>
   <div class="flex justify-between m-4 items-center">
     <div class="w-48">
       @if ($excludedCount() > 0) {
@@ -7,9 +13,6 @@
       } @else {
         <app-button suffixIcon="ph-x" size="sm" (click)="deselectAll()">Deselect all</app-button>
       }
-    </div>
-    <div class="text-indigo-400 text-2xl">Export <span
-      class="font-semibold px-2 py-1 bg-indigo-500 rounded-xl text-white">{{ $selectedCount() }}</span> tabs
     </div>
   </div>
   <div class="grow overflow-auto px-4">
@@ -24,4 +27,3 @@
     </div>
   </div>
 </div>
-
