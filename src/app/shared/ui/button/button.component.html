@@ -1,12 +1,13 @@
 <button
-  [class]="`w-full flex justify-center items-center shadow-indigo-500/50 shadow-md rounded-2xl text-white font-semibold bg-indigo-500 hover:bg-indigo-500/90 cursor-pointer flex items-center gap-4 ${button[size()]}`"
-[ngClass]="{'opacity-50 pointer-events-none shadow-none':disabled()}"
-  >
-  @if(prefixIcon()) {
-    <i [class]="`ph-bold ${prefixIcon()}`"></i>
+  class="w-full flex justify-center items-center rounded-2xl font-semibold cursor-pointer flex items-center gap-4 {{
+    buttonSize[size()]
+  }} {{ buttonStyle[variant()] }}"
+  [ngClass]="{ 'opacity-50 pointer-events-none shadow-none': disabled() }">
+  @if (prefixIcon()) {
+    <i class="ph-bold {{ prefixIcon() }}"></i>
   }
   <ng-content></ng-content>
-  @if(suffixIcon()) {
-    <i [class]="`ph-bold ${suffixIcon()}`"></i>
+  @if (suffixIcon()) {
+    <i class="ph-bold {{ suffixIcon() }}"></i>
   }
 </button>

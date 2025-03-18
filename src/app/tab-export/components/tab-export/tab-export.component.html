@@ -1,28 +1,44 @@
-<div class="h-full flex flex-col">
+<div class="h-full flex flex-col p-4">
   <div>
-    <div class="text-white font-semibold text-4xl text-center mt-4 mb-8">Export&nbsp;<span
-      class="font-semibold px-2 py-1 bg-indigo-500 rounded-xl text-white">{{ $selectedCount() }}</span>
+    <div class="text-white font-semibold text-4xl text-center mt-4 mb-8">
+      Export&nbsp;<span
+        class="font-semibold px-2 py-1 bg-indigo-500 rounded-xl text-white"
+        >{{ $selectedCount() }}</span
+      >
       tab{{ $selectedCount() === 1 ? '' : 's' }}
     </div>
-    <div class="text-indigo-500 font-semibold text-4xl text-center">Import <i class="ph-bold ph-import"></i></div>
+    <div class="text-indigo-500 font-semibold text-4xl text-center">
+      Import <i class="ph-bold ph-import"></i>
+    </div>
   </div>
-  <div class="flex justify-between m-4 items-center">
+  <div class="flex justify-between my-4 items-center">
     <div class="w-48">
       @if ($excludedCount() > 0) {
-        <app-button suffixIcon="ph-check" size="sm" (click)="selectAll()">Select all</app-button>
+        <app-button suffixIcon="ph-check" size="sm" (click)="selectAll()"
+          >Select all
+        </app-button>
       } @else {
-        <app-button suffixIcon="ph-x" size="sm" (click)="deselectAll()">Deselect all</app-button>
+        <app-button suffixIcon="ph-x" size="sm" (click)="deselectAll()"
+          >Deselect all
+        </app-button>
       }
     </div>
   </div>
-  <div class="grow overflow-auto px-4">
+  <div class="grow overflow-auto">
     @for (tab of $currentWindowTabs(); track tab.id) {
-      <app-tab-export-list-item [tab]="tab" (click)="onTabToggle(tab)" [excluded]="$excludedTabsMap()[tab.id]"/>
+      <app-tab-export-list-item
+        [tab]="tab"
+        (click)="onTabToggle(tab)"
+        [excluded]="$excludedTabsMap()[tab.id]" />
     }
   </div>
   <div class="flex justify-center mt-6 mb-4">
     <div class="w-64">
-      <app-button (click)="exportTabs()" suffixIcon="ph-share-network" [disabled]="$selectedCount() === 0">Export tabs
+      <app-button
+        (click)="exportTabs()"
+        suffixIcon="ph-share-network"
+        [disabled]="$selectedCount() === 0"
+        >Export tabs
       </app-button>
     </div>
   </div>

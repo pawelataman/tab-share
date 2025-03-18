@@ -1,0 +1,47 @@
+<div class="h-full w-full p-4 flex flex-col">
+  <div class="flex flex-col justify-center items-center">
+    <div class="text-white font-semibold text-4xl text-center mt-4 mb-4">
+      Tab&nbsp;<span
+        class="font-semibold px-2 py-1 bg-indigo-500 rounded-xl text-white"
+        >Share</span
+      >
+    </div>
+    <span class="text-2xl text-slate-400"
+      >Import or export your browser tabs</span
+    >
+  </div>
+  <div class="grow flex items-center justify-center gap-8">
+    <div class="w-full">
+      <app-card [routerLink]="['/import']">
+        <app-tab-feature-card
+          [data]="{
+            tip:
+              ' Enter your export code to restore all your previously saved tabs\n' +
+              '                in one click.',
+            action: 'Import now',
+            description: ' Restore your saved tabs from an export code',
+            title: 'Import Tabs',
+            icon: 'ph-download',
+          }" />
+      </app-card>
+    </div>
+    <div class="w-full">
+      <app-card [routerLink]="['/export']">
+        <app-tab-feature-card
+          [data]="{
+            tip: 'Select which tabs you want to save and get a unique code to restore them on any device.',
+            action: 'Export now',
+            description: 'Save your current tabs to access later',
+            title: 'Export Tabs',
+            icon: 'ph-upload',
+          }" />
+      </app-card>
+    </div>
+  </div>
+  <div>
+    <p class="text-slate-500 text-center text-2xl">
+      Your tabs are securely encoded and can be restored on any device. No
+      account required.
+    </p>
+  </div>
+</div>

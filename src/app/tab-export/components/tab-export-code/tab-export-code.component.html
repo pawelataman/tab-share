@@ -1,12 +1,20 @@
-<div class="h-full w-full flex flex-col justify-center items-center gap-8 px-24">
+<div class="h-full w-full flex flex-col justify-center items-center gap-8 p-4">
   <div>
-    <h1 class="text-white font-semibold text-6xl text-center">Your export code</h1>
-    <h2 class="text-slate-500 text-xl text-center mt-4">Copy this code to import your tabs on another device</h2>
+    <h1 class="text-white font-semibold text-4xl text-center">
+      Your export code
+    </h1>
+    <h2 class="text-slate-500 text-xl text-center mt-4">
+      Copy this code to import your tabs on another device
+    </h2>
   </div>
-  <div class="w-full mx-12 flex justify-center items-center py-8 rounded-2xl border border-slate-800 bg-slate-950">
-    <span class="text-indigo-500 font-semibold text-8xl tracking-widest py-8">{{ $exportCode() }}</span>
+  <div
+    class="w-full flex justify-center items-center py-8 rounded-2xl border border-slate-800 bg-slate-950">
+    <span class="text-indigo-500 font-semibold text-8xl tracking-widest py-8">{{
+      $exportCode()
+    }}</span>
   </div>
   <app-button size="md" suffixIcon="ph-copy">Copy Code</app-button>
+  <app-button size="md" [variant]="'tertiary'" prefixIcon="ph-arrow-left"
+    >Back to tabs
+  </app-button>
 </div>
-
-

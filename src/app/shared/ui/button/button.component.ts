@@ -1,25 +1,33 @@
-import {Component, input} from '@angular/core';
-import {NgClass} from '@angular/common';
+import { Component, input } from '@angular/core';
+import { NgClass } from '@angular/common';
 
-type SizeVariants = 'sm' | 'md' | 'lg'
+type SizeVariants = 'sm' | 'md' | 'lg';
+type TypeVariants = 'primary' | 'secondary' | 'tertiary';
 
 @Component({
   selector: 'app-button',
-  imports: [
-    NgClass
-  ],
+  imports: [NgClass],
   templateUrl: './button.component.html',
-  styleUrl: './button.component.scss'
+  styleUrl: './button.component.scss',
 })
 export class ButtonComponent {
-  prefixIcon = input<string>()
-  suffixIcon = input<string>()
-  size = input<SizeVariants>('md')
-  disabled = input<boolean>(false)
+  prefixIcon = input<string>();
+  suffixIcon = input<string>();
+  size = input<SizeVariants>('md');
+  variant = input<TypeVariants>('primary');
+  disabled = input<boolean>(false);
 
-  button: { [P in SizeVariants]: string } = {
-    'sm': 'px-4 py-2 text-xl',
-    'md': 'px-8 py-4 text-2xl',
-    'lg': 'px-12 py-8 text-4xl'
-  }
+  buttonSize: { [P in SizeVariants]: string } = {
+    sm: 'px-4 py-2 text-xl',
+    md: 'px-8 py-4 text-2xl',
+    lg: 'px-12 py-8 text-4xl',
+  };
+
+  buttonStyle: { [P in TypeVariants]: string } = {
+    primary:
+      'active:bg-indigo-600 shadow-indigo-500/50 text-white bg-indigo-500 hover:bg-indigo-500/90 shadow-md',
+    secondary: '',
+    tertiary:
+      'text-indigo-500 hover:text-indigo-300 hover:bg-indigo-500/10 border border-indigo-500/20',
+  };
 }
