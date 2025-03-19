@@ -6,3 +6,5 @@ export enum AppRoutesPaths {
   EXPORT = 'export',
   CODE = 'code',
 }
+
+export const CODE_LENGTH = 6;

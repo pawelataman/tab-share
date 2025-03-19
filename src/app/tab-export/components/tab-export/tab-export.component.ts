@@ -5,6 +5,7 @@ import { TabExportListItemComponent } from '../tab-export-list-item/tab-export-l
 import { ExportFacade } from '../../state/export.facade';
 import { Router } from '@angular/router';
 import { AppRoutesPaths } from '../../../core/state/core.consts';
+import { ExportTab } from '../../state/export.models';
 
 @Component({
   selector: 'app-tab-export',
@@ -18,9 +19,7 @@ export class TabExportComponent {
   $currentWindowTabs = this.exportFacade.$currentWindowTabs;
   $excludedCount = computed(() => this.exportFacade.$excludedTabsArr().length);
   $excludedTabsMap = this.exportFacade.$excludedTabs;
-  $selectedCount = computed(
-    () => this.$currentWindowTabs().length - this.$excludedCount()
-  );
+  $selectedCount = computed(() => this.$currentWindowTabs().length - this.$excludedCount());
 
   onTabToggle(tab: ChromeTabWithId): void {
     const currentlyExcluded = this.$excludedTabsMap();
@@ -44,10 +43,18 @@ export class TabExportComponent {
   }
 
   exportTabs() {
-    const tabsToExport = this.$currentWindowTabs().filter(
-      tab => !this.$excludedTabsMap[tab.id]
-    );
-    this.exportFacade.exportTabs({ url: tabsToExport.map(tabs => tabs.url) });
+    const tabsToExport: ExportTab[] = this.$currentWindowTabs()
+      .filter(tab => !this.$excludedTabsMap()[tab.id])
+      .map(
+        tab =>
+          ({
+            url: tab.url,
+            name: tab.title,
+            faviconUrl: tab.favIconUrl,
+          }) as ExportTab
+      );
+    
+    this.exportFacade.exportTabs({ tabs: tabsToExport });
   }
 
   goHome(): void {

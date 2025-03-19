@@ -1,6 +1,8 @@
-import { Component, computed, model } from '@angular/core';
+import { Component, computed, inject, model } from '@angular/core';
 import { CodeInputModule } from 'angular-code-input';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
+import { ImportFacade } from '../../state/import.facade';
+import { CODE_LENGTH } from '../../../core/state/core.consts';
 
 @Component({
   selector: 'app-tab-import',
@@ -9,11 +11,9 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
   styleUrl: 'tab-import.component.scss',
 })
 export class TabImportComponent {
-  CODE_LENGTH = 6;
   code = model('');
-  $canImport = computed(
-    () => this.code() && this.code().length === this.CODE_LENGTH
-  );
+  $canImport = computed(() => this.code() && this.code().length === this.CODE_LENGTH);
+  importFacade = inject(ImportFacade);
 
   onCodeChanged(code: string) {
     console.log('code changed', code);
@@ -23,4 +23,19 @@ export class TabImportComponent {
   onCodeCompleted(code: string) {
     console.log('code completed', code);
   }
+
+  async clipboard(): Promise<void> {
+    const codeFromClipboard = await navigator.clipboard.readText();
+    if (codeFromClipboard && codeFromClipboard.length === CODE_LENGTH) {
+      this.code.set(codeFromClipboard);
+    }
+  }
+
+  import(): void {
+    if (this.$canImport()) {
+      this.importFacade.importTabs({ code: this.code() });
+    }
+  }
+
+  protected readonly CODE_LENGTH = CODE_LENGTH;
 }
