@@ -18,8 +18,7 @@
         [isCharsCode]="true"
         [code]="code()"
         [codeLength]="CODE_LENGTH"
-        (codeChanged)="onCodeChanged($event)"
-        (codeCompleted)="onCodeCompleted($event)">
+        (codeChanged)="onCodeChanged($event)">
       </code-input>
       <span class="text-slate-500 text-xl text-center"
         >The code can be found on the device where you exported your tabs</span
@@ -36,5 +35,10 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="grow flex flex-col w-full gap-2 overflow-auto">
+    @for (tab of $importedTabs(); track $index) {
+      <app-tab-list-item [tab]="tab" />
+    }
   </div>
 </div>

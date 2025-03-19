@@ -50,10 +50,10 @@ export class TabExportComponent {
           ({
             url: tab.url,
             name: tab.title,
-            faviconUrl: tab.favIconUrl,
+            favIconUrl: tab.favIconUrl,
           }) as ExportTab
       );
-    
+
     this.exportFacade.exportTabs({ tabs: tabsToExport });
   }
 

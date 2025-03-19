@@ -26,7 +26,7 @@ export const ImportStore = signalStore(
           tapResponse(
             response => {
               patchState(store, { tabs: response.tabs });
-              chromeFacade.openTabs(response.tabs.map(tab => tab.url));
+              // chromeFacade.openTabs(response.tabs.map(tab => tab.url));
             },
             error => {
               console.log(error);

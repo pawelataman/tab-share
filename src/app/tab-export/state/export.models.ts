@@ -9,7 +9,7 @@ export type ExportState = {
 export type ExportTab = {
   url: string;
   name: string;
-  faviconUrl: string;
+  favIconUrl: string;
 };
 
 export type ExcludedTabs = { [key: string]: boolean };

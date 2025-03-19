@@ -1,7 +1,7 @@
 export type ImportTab = {
   url: string;
   name: string;
-  faviconUrl: string;
+  favIconUrl: string;
 };
 
 export type ImportState = {

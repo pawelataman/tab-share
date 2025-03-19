@@ -3,10 +3,11 @@ import { CodeInputModule } from 'angular-code-input';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { ImportFacade } from '../../state/import.facade';
 import { CODE_LENGTH } from '../../../core/state/core.consts';
+import { TabListItemComponent } from '../../../shared/ui/tab-list-item/tab-list-item.component';
 
 @Component({
   selector: 'app-tab-import',
-  imports: [CodeInputModule, ButtonComponent],
+  imports: [CodeInputModule, ButtonComponent, TabListItemComponent],
   templateUrl: './tab-import.component.html',
   styleUrl: 'tab-import.component.scss',
 })
@@ -14,14 +15,10 @@ export class TabImportComponent {
   code = model('');
   $canImport = computed(() => this.code() && this.code().length === this.CODE_LENGTH);
   importFacade = inject(ImportFacade);
+  $importedTabs = this.importFacade.$tabs;
 
   onCodeChanged(code: string) {
-    console.log('code changed', code);
     this.code.set(code);
-  }
-
-  onCodeCompleted(code: string) {
-    console.log('code completed', code);
   }
 
   async clipboard(): Promise<void> {
