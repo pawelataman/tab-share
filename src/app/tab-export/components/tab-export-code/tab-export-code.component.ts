@@ -4,12 +4,13 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { Router } from '@angular/router';
 import { AppRoutesPaths } from '../../../core/state/core.consts';
 import { NgClass } from '@angular/common';
+import { CardComponent } from '../../../shared/ui/card/card.component';
 
 const COPY_TIMEOUT = 2_000;
 
 @Component({
   selector: 'app-tab-export-code',
-  imports: [ButtonComponent, NgClass],
+  imports: [ButtonComponent, NgClass, CardComponent],
   templateUrl: './tab-export-code.component.html',
   styleUrl: 'tab-export-code.component.scss',
 })

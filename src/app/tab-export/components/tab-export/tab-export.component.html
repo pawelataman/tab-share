@@ -7,9 +7,6 @@
       >
       tab{{ $selectedCount() === 1 ? '' : 's' }}
     </div>
-    <div class="text-indigo-500 font-semibold text-4xl text-center">
-      Import <i class="ph-bold ph-import"></i>
-    </div>
   </div>
   <div class="flex justify-between my-4 items-center">
     <div class="w-48">
@@ -44,7 +41,7 @@
     <div class="w-64">
       <app-button
         (click)="exportTabs()"
-        suffixIcon="ph-share-network"
+        suffixIcon="ph-upload"
         [disabled]="$selectedCount() === 0"
         >Export tabs
       </app-button>

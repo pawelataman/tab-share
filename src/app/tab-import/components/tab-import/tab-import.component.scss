@@ -1,0 +1,22 @@
+code-input {
+  --indigo-500-30: rgba(99, 102, 241, 0.3);
+  --indigo-500-20: rgba(99, 102, 241, 0.2);
+  --indigo-500: #6366f1;
+  --indigo-300: #818cf8;
+
+  --item-height: 6.4rem;
+  --item-spacing: 1.2rem;
+  --item-border: 1px solid var(--indigo-500-30);
+  --item-border-bottom: 1px solid var(--indigo-500-30);
+  --item-border-bottom-has-value: 2px solid var(--indigo-500-30);
+  --item-border-has-value: 1px solid var(--indigo-500-30);
+  --item-border-focused: 2px solid var(--indigo-500-30);
+  --item-border-bottom-focused: 2px solid var(--indigo-500-30);
+  --item-shadow-focused: 0px 0px 5px var(--indigo-500-20);
+  --item-font-weight: 300;
+  --item-border-radius: 0.8rem;
+  --item-background: rgba(30, 41, 59, 0.5);
+  font-size: 3.2rem;
+  color: white;
+  width: 36rem;
+}
