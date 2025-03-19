@@ -45,6 +45,7 @@ export const ExportStore = signalStore(
           )
         )
       ),
+      resetState: () => patchState(store, INITIAL_STATE),
     };
   }),
   withHooks({

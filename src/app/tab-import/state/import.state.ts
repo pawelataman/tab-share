@@ -5,9 +5,8 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap } from 'rxjs';
 import { tapResponse } from '@ngrx/operators';
-import { ChromeFacade } from '../../core/services/chrome-facade';
 
-const INITIAL: ImportState = {
+const INITIAL_STATE: ImportState = {
   tabs: [],
 };
 
@@ -15,10 +14,9 @@ export const ImportStore = signalStore(
   {
     providedIn: 'root',
   },
-  withState<ImportState>(INITIAL),
+  withState<ImportState>(INITIAL_STATE),
   withMethods(store => {
     const httpService = inject(ImportHttpService);
-    const chromeFacade = inject(ChromeFacade);
     return {
       importTabs: rxMethod<ImportTabsRequest>(
         pipe(
@@ -26,7 +24,6 @@ export const ImportStore = signalStore(
           tapResponse(
             response => {
               patchState(store, { tabs: response.tabs });
-              // chromeFacade.openTabs(response.tabs.map(tab => tab.url));
             },
             error => {
               console.log(error);
@@ -34,6 +31,7 @@ export const ImportStore = signalStore(
           )
         )
       ),
+      resetState: () => patchState(store, INITIAL_STATE),
     };
   })
 );

@@ -12,4 +12,8 @@ export class ImportFacade {
   importTabs(request: ImportTabsRequest): void {
     this.importStore.importTabs(request);
   }
+
+  resetState(): void {
+    this.importStore.resetState();
+  }
 }

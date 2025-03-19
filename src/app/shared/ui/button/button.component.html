@@ -4,10 +4,10 @@
   }} {{ buttonStyle[variant()] }}"
   [ngClass]="{ 'opacity-50 pointer-events-none shadow-none': disabled() }">
   @if (prefixIcon()) {
-    <i class="ph-bold {{ prefixIcon() }}"></i>
+    <i class="ph-bold {{ prefixIcon() }} {{ iconSize[size()] }}"></i>
   }
   <ng-content></ng-content>
   @if (suffixIcon()) {
-    <i class="ph-bold {{ suffixIcon() }}"></i>
+    <i class="ph-bold {{ suffixIcon() }} {{ iconSize[size()] }}"></i>
   }
 </button>
