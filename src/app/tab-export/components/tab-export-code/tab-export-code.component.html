@@ -1,42 +1,26 @@
 <div class="h-full w-full flex flex-col justify-center items-center gap-8 p-4">
-  <div class="p-4 rounded-full bg-indigo-500/20 border-2 border-slate-500/10">
-    <i class="ph-bold ph-upload text-6xl text-indigo-400"></i>
+  <div class="flex flex-col items-center gap-8 justify-center">
+    <div class="p-4 rounded-full bg-indigo-500/20 border-2 border-slate-500/10 w-max-content">
+      <i class="ph-bold ph-upload text-6xl text-indigo-400"></i>
+    </div>
+    <h1 class="text-white font-semibold text-4xl text-center">Your export code</h1>
+    <h2 class="text-slate-500 text-xl text-center">Copy this code to import your tabs on another device</h2>
   </div>
-  <div>
-    <h1 class="text-white font-semibold text-4xl text-center">
-      Your export code
-    </h1>
-    <h2 class="text-slate-500 text-xl text-center mt-4">
-      Copy this code to import your tabs on another device
-    </h2>
-  </div>
+
   <div class="w-full">
     <app-card>
       <div class="relative flex flex-col justify-center items-center py-8">
-        <span
-          class="text-indigo-500 font-semibold text-8xl tracking-widest py-8"
-          >{{ $exportCode() }}</span
-        >
+        <span class="text-indigo-500 font-semibold text-8xl tracking-widest py-8">{{ $exportCode() }}</span>
       </div>
     </app-card>
   </div>
 
-  <app-button size="md" suffixIcon="ph-copy" (click)="copyToClipboard()"
-    >Copy Code
-  </app-button>
+  <app-button size="md" suffixIcon="ph-copy" (click)="copyToClipboard()">Copy Code</app-button>
   <div class="flex gap-4 w-full">
-    <app-button
-      size="md"
-      [variant]="'tertiary'"
-      prefixIcon="ph-caret-left"
-      (click)="backToTabs()"
+    <app-button size="md" [variant]="'tertiary'" prefixIcon="ph-caret-left" (click)="backToTabs()"
       >Back to tabs
     </app-button>
-    <app-button
-      size="md"
-      [variant]="'tertiary'"
-      suffixIcon="ph-download"
-      (click)="goToImport()"
+    <app-button size="md" [variant]="'tertiary'" suffixIcon="ph-download" (click)="goToImport()"
       >Go to import
     </app-button>
   </div>

@@ -1,9 +1,8 @@
-import { patchState, signalStore, withComputed, withHooks, withMethods, withState } from '@ngrx/signals';
+import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { ChromeFacade } from '../../core/services/chrome-facade';
 import { computed, inject } from '@angular/core';
 import { DESIRED_URL_PREFIXES } from '../../core/state/core.consts';
 import { ExcludedTabs, ExportState, ExportTabsRequest } from './export.models';
-import { CoreFacade } from '../../core/state/core.facade';
 import { pipe, switchMap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { ExportHttpService } from '../services/export-http.service';
@@ -26,6 +25,7 @@ export const ExportStore = signalStore(
   })),
   withMethods(store => {
     const httpService = inject(ExportHttpService);
+    const chromeFacade = inject(ChromeFacade);
     const router = inject(Router);
     return {
       setExcludedTabs: (excludedTabs: ExcludedTabs) => {
@@ -46,16 +46,10 @@ export const ExportStore = signalStore(
         )
       ),
       resetState: () => patchState(store, INITIAL_STATE),
+      loadTabs: async () => {
+        const currentWindowTabs = await chromeFacade.getCurrentWindowTabs();
+        patchState(store, { currentWindowTabs });
+      },
     };
-  }),
-  withHooks({
-    onInit: async store => {
-      const chromeFacade = inject(ChromeFacade);
-      const coreFacade = inject(CoreFacade);
-      coreFacade.setLoading(true);
-      const currentWindowTabs = await chromeFacade.getCurrentWindowTabs();
-      patchState(store, { currentWindowTabs });
-      coreFacade.setLoading(false);
-    },
   })
 );

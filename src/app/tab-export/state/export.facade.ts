@@ -23,4 +23,8 @@ export class ExportFacade {
   resetState(): void {
     this.exportStore.resetState();
   }
+
+  loadTabs(): void {
+    this.exportStore.loadTabs();
+  }
 }

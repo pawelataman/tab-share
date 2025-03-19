@@ -1,16 +1,12 @@
-<div class="h-full w-full flex flex-col justify-center items-center gap-16 p-4 relative">
-  <div>
-    <div class="p-4 rounded-full bg-indigo-500/20 border-2 border-slate-500/10 absolute left-4 top-4">
-      <i class="ph-bold ph-download text-3xl text-indigo-400"></i>
+<div class="h-full w-full flex flex-col justify-center items-center gap-8 p-4">
+  <div class="flex flex-col items-center gap-8 justify-center">
+    <div class="p-4 rounded-full bg-indigo-500/20 border-2 border-slate-500/10 w-max-content">
+      <i class="ph-bold ph-download text-6xl text-indigo-400"></i>
     </div>
-    <div>
-      <h1 class="text-white font-semibold text-4xl text-center">Import your tabs</h1>
-      <h2 class="text-slate-500 text-xl text-center">Enter the export code to restore your saved tabs</h2>
-    </div>
-    <div></div>
+    <h1 class="text-white font-semibold text-4xl text-center">Import your tabs</h1>
+    <h2 class="text-slate-500 text-xl text-center">Enter the export code to restore your saved tabs</h2>
   </div>
-
-  <div class="grow flex flex-col items-center w-full gap-4 overflow-hidden">
+  <div class="grow flex flex-col items-center justify-center w-full gap-4 overflow-hidden">
     @if (!$importedTabs().length) {
       <div class="flex flex-col items-center gap-4">
         <code-input
@@ -27,7 +23,7 @@
 
         <div class="flex flex-row gap-4">
           <div class="grow">
-            <app-button [variant]="'tertiary'" suffixIcon="ph-clipboard-text" (click)="clipboard()"></app-button>
+            <app-button [variant]="'tertiary'" suffixIcon="ph-clipboard-text" (click)="clipboard()">Paste</app-button>
           </div>
           <div class="grow">
             <app-button variant="primary" suffixIcon="ph-download" [disabled]="!$canImport()" (click)="import()"

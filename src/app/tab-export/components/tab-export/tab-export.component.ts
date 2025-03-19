@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { ChromeTabWithId } from '../../../core/state/core.models';
 import { TabExportListItemComponent } from '../tab-export-list-item/tab-export-list-item.component';
@@ -12,14 +12,17 @@ import { ExportTab } from '../../state/export.models';
   imports: [ButtonComponent, TabExportListItemComponent],
   templateUrl: './tab-export.component.html',
 })
-export class TabExportComponent {
+export class TabExportComponent implements OnInit {
   exportFacade = inject(ExportFacade);
   router = inject(Router);
-
   $currentWindowTabs = this.exportFacade.$currentWindowTabs;
   $excludedCount = computed(() => this.exportFacade.$excludedTabsArr().length);
   $excludedTabsMap = this.exportFacade.$excludedTabs;
   $selectedCount = computed(() => this.$currentWindowTabs().length - this.$excludedCount());
+
+  ngOnInit(): void {
+    this.exportFacade.loadTabs();
+  }
 
   onTabToggle(tab: ChromeTabWithId): void {
     const currentlyExcluded = this.$excludedTabsMap();

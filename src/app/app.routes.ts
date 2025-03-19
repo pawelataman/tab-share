@@ -4,6 +4,8 @@ import { TabExportComponent } from './tab-export/components/tab-export/tab-expor
 import { TabExportCodeComponent } from './tab-export/components/tab-export-code/tab-export-code.component';
 import { TabLandingComponent } from './tab-landing/components/tab-landing/tab-landing.component';
 import { AppRoutesPaths } from './core/state/core.consts';
+import { canActivateImportGuard } from './tab-import/guards/can-activate-import.guard';
+import { canActivateExportGuard } from './tab-export/guards/can-activate-export.guard';
 
 export const routes: Routes = [
   {
@@ -13,14 +15,26 @@ export const routes: Routes = [
   {
     path: AppRoutesPaths.IMPORT,
     component: TabImportComponent,
+    canActivate: [canActivateImportGuard],
   },
   {
     path: AppRoutesPaths.EXPORT,
-    component: TabExportComponent,
-  },
-  {
-    path: `${AppRoutesPaths.EXPORT}/${AppRoutesPaths.CODE}`,
-    component: TabExportCodeComponent,
+    canActivate: [canActivateExportGuard],
+    children: [
+      {
+        path: '',
+        component: TabExportComponent,
+      },
+      {
+        path: AppRoutesPaths.CODE,
+        component: TabExportCodeComponent,
+      },
+      {
+        path: '**',
+        pathMatch: 'full',
+        redirectTo: '',
+      },
+    ],
   },
   {
     path: '',
