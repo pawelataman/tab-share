@@ -32,7 +32,15 @@
         [excluded]="$excludedTabsMap()[tab.id]" />
     }
   </div>
-  <div class="flex justify-center mt-6 mb-4">
+  <div class="flex justify-between mt-6">
+    <div class="w-64">
+      <app-button
+        [variant]="'tertiary'"
+        prefixIcon="ph-caret-left"
+        (click)="goHome()"
+        >Home
+      </app-button>
+    </div>
     <div class="w-64">
       <app-button
         (click)="exportTabs()"

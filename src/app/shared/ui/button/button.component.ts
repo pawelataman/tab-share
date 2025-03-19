@@ -25,9 +25,8 @@ export class ButtonComponent {
 
   buttonStyle: { [P in TypeVariants]: string } = {
     primary:
-      'active:bg-indigo-600 shadow-indigo-500/50 text-white bg-indigo-500 hover:bg-indigo-500/90 shadow-md',
+      'active:bg-indigo-600 shadow-indigo-500/50 text-white bg-indigo-500 hover:bg-indigo-500/90 shadow-sm',
     secondary: '',
-    tertiary:
-      'text-indigo-500 hover:text-indigo-300 hover:bg-indigo-500/10 border border-indigo-500/20',
+    tertiary: 'text-indigo-400 hover:bg-indigo-500/10 border border-slate-800',
   };
 }

@@ -1,0 +1,11 @@
+.toast {
+  transition: all 300ms ease-in-out;
+  opacity: 0;
+
+  transform: translateY(50%) scale(0.75);
+
+  &--active {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}

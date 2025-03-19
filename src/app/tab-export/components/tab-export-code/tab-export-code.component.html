@@ -8,13 +8,35 @@
     </h2>
   </div>
   <div
-    class="w-full flex justify-center items-center py-8 rounded-2xl border border-slate-800 bg-slate-950">
+    class="w-full flex flex-col justify-center items-center py-8 rounded-2xl border border-slate-800 bg-slate-950">
     <span class="text-indigo-500 font-semibold text-8xl tracking-widest py-8">{{
       $exportCode()
     }}</span>
   </div>
-  <app-button size="md" suffixIcon="ph-copy">Copy Code</app-button>
-  <app-button size="md" [variant]="'tertiary'" prefixIcon="ph-arrow-left"
-    >Back to tabs
+  <app-button size="md" suffixIcon="ph-copy" (click)="copyToClipboard()"
+    >Copy Code
   </app-button>
+  <div class="flex gap-4 w-full">
+    <app-button
+      size="md"
+      [variant]="'tertiary'"
+      prefixIcon="ph-caret-left"
+      (click)="backToTabs()"
+      >Back to tabs
+    </app-button>
+    <app-button
+      size="md"
+      [variant]="'tertiary'"
+      suffixIcon="ph-download"
+      (click)="goToImport()"
+      >Go to import
+    </app-button>
+  </div>
+  <span
+    class="p-4 fixed bottom-4 rounded-xl bg-emerald-500 text-xl text-white font-semibold toast"
+    [ngClass]="{
+      'toast--active': copied(),
+    }"
+    >Copied!</span
+  >
 </div>

@@ -1,17 +1,20 @@
-import {patchState, signalStore, withMethods, withState} from '@ngrx/signals';
-import {CoreState} from './core.models';
+import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import { AppError, CoreState } from './core.models';
 
 const INITIAL_STATE: CoreState = {
-  isLoading: false
-}
+  isLoading: false,
+  error: null,
+};
 
 export const CoreStore = signalStore(
-  {providedIn: 'root'},
+  { providedIn: 'root' },
   withState<CoreState>(INITIAL_STATE),
-  withMethods((store) => ({
+  withMethods(store => ({
     setLoading: (isLoading: boolean) => {
-      patchState(store, {isLoading})
-    }
+      patchState(store, { isLoading });
+    },
+    setError: (error: AppError | null) => {
+      patchState(store, { error });
+    },
   }))
-)
-
+);
