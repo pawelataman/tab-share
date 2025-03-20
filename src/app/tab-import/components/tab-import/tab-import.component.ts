@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { CodeInputModule } from 'angular-code-input';
 import { AppRoutesPaths } from '../../../core/state/core.consts';
 import { ChromeFacade } from '../../../core/services/chrome-facade';
@@ -18,6 +18,8 @@ export class TabImportComponent {
   router = inject(Router);
   $importedTabs = this.importFacade.$tabs;
 
+  $isPreview = computed(() => this.$importedTabs() && this.$importedTabs().length);
+
   openTabs(): void {
     this.chromeFacade.openTabs(this.$importedTabs().map(importedTab => importedTab.url));
   }
@@ -28,5 +30,9 @@ export class TabImportComponent {
 
   home(): void {
     this.router.navigate(['/', AppRoutesPaths.LANDING_PAGE]);
+  }
+
+  onReimport(): void {
+    this.importFacade.resetState();
   }
 }

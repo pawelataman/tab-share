@@ -12,10 +12,15 @@ import { ImportTab } from '../../state/import.models';
 export class TabImportPreviewComponent {
   importedTabs = input.required<ImportTab[]>();
   open = output<void>();
+  reimport = output<void>();
 
   openTabs(): void {
-    if (this.importedTabs.length) {
+    if (this.importedTabs().length) {
       this.open.emit();
     }
+  }
+
+  importAgain(): void {
+    this.reimport.emit();
   }
 }

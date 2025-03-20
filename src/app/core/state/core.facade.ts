@@ -7,6 +7,7 @@ import { AppError } from './core.models';
 })
 export class CoreFacade {
   private coreStore = inject(CoreStore);
+  $error = this.coreStore.error;
 
   setLoading(isLoading: boolean): void {
     this.coreStore.setLoading(isLoading);

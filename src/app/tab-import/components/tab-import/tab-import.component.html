@@ -1,17 +1,21 @@
 <div class="h-full w-full flex flex-col justify-between items-center gap-8 p-4 relative">
   <div class="flex flex-col items-center gap-2 justify-center">
     <div class="p-4 rounded-full bg-indigo-500/20 border-2 border-slate-500/10 w-max-content">
-      <i class="ph-bold ph-download text-6xl text-indigo-400"></i>
+      <i class="ph-bold {{ $isPreview() ? 'ph-eye' : 'ph-download' }} text-6xl text-indigo-400"></i>
     </div>
-    <h1 class="text-white font-semibold text-4xl text-center">Import your tabs</h1>
-    <h2 class="text-slate-500 text-xl text-center">Enter the export code to restore your saved tabs</h2>
+    <h1 class="text-white font-semibold text-4xl text-center">
+      {{ $isPreview() ? 'Preview tabs' : 'Import your tabs' }}
+    </h1>
+    <h2 class="text-slate-500 text-xl text-center">
+      {{ $isPreview() ? 'Check what tabs will be opened' : 'Enter the export code to restore your saved tabs' }}
+    </h2>
   </div>
 
   <div class="grow w-full overflow-hidden">
-    @if (!$importedTabs().length) {
+    @if (!$isPreview()) {
       <app-tab-import-code (submit)="importTabs($event)" />
     } @else {
-      <app-tab-import-preview [importedTabs]="$importedTabs()" (open)="openTabs()" />
+      <app-tab-import-preview [importedTabs]="$importedTabs()" (open)="openTabs()" (reimport)="onReimport()" />
     }
   </div>
 </div>

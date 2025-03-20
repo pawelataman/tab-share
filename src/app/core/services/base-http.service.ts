@@ -18,6 +18,7 @@ export class BaseHttpService {
   private onError<T>(err: T): Observable<T> {
     if (isHttpErrorResponse(err)) {
       //TODO: somehow handle error
+      console.log(err.error);
     }
     return of(err);
   }

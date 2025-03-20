@@ -1,5 +1,5 @@
 <div class="h-full w-full flex flex-col justify-between items-center gap-8 p-4">
-  <div class="flex flex-col items-center gap-8 justify-center">
+  <div class="flex flex-col items-center gap-4 justify-center">
     <div class="p-4 rounded-full bg-indigo-500/20 border-2 border-slate-500/10 w-max-content">
       <i class="ph-bold ph-upload text-6xl text-indigo-400"></i>
     </div>
@@ -25,11 +25,4 @@
       <app-button size="md" suffixIcon="ph-copy" (click)="copyToClipboard()">Copy Code</app-button>
     </div>
   </div>
-  <span
-    class="p-4 fixed top-6 right-6 rounded-xl bg-emerald-500 text-xl text-white font-semibold toast"
-    [ngClass]="{
-      'toast--active': copied(),
-    }"
-    >Copied!</span
-  >
 </div>

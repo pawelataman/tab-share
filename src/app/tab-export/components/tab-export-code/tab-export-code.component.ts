@@ -1,23 +1,20 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ExportFacade } from '../../state/export.facade';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { Router } from '@angular/router';
 import { AppRoutesPaths } from '../../../core/state/core.consts';
-import { NgClass } from '@angular/common';
 import { CardComponent } from '../../../shared/ui/card/card.component';
-
-const COPY_TIMEOUT = 2_000;
+import { ToastService } from '../../../core/features/toaster/services/toast.service';
 
 @Component({
   selector: 'app-tab-export-code',
-  imports: [ButtonComponent, NgClass, CardComponent],
+  imports: [ButtonComponent, CardComponent],
   templateUrl: './tab-export-code.component.html',
   styleUrl: 'tab-export-code.component.scss',
 })
 export class TabExportCodeComponent {
   private router = inject(Router);
-  private copyTimeout: any | null = null;
-  copied = signal<boolean>(false);
+  private toastService = inject(ToastService);
 
   exportFacade = inject(ExportFacade);
   $exportCode = this.exportFacade.$exportCode;
@@ -28,14 +25,6 @@ export class TabExportCodeComponent {
 
   async copyToClipboard(): Promise<void> {
     await navigator.clipboard.writeText(this.$exportCode());
-
-    if (this.copyTimeout) {
-      clearTimeout(this.copyTimeout);
-    }
-    this.copied.set(true);
-
-    this.copyTimeout = setTimeout(() => {
-      this.copied.set(false);
-    }, COPY_TIMEOUT);
+    this.toastService.pushToast({ id: Date.now().toString(), type: 'success', message: 'Copied to clipboard' });
   }
 }
