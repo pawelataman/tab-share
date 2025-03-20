@@ -1,4 +1,4 @@
-<div class="h-full w-full flex flex-col justify-center items-center gap-8 p-4">
+<div class="h-full w-full flex flex-col justify-between items-center gap-8 p-4">
   <div class="flex flex-col items-center gap-8 justify-center">
     <div class="p-4 rounded-full bg-indigo-500/20 border-2 border-slate-500/10 w-max-content">
       <i class="ph-bold ph-upload text-6xl text-indigo-400"></i>
@@ -8,21 +8,22 @@
   </div>
 
   <div class="w-full">
-    <app-card>
+    <app-card (click)="copyToClipboard()">
       <div class="relative flex flex-col justify-center items-center py-8">
         <span class="text-indigo-500 font-semibold text-8xl tracking-widest py-8">{{ $exportCode() }}</span>
       </div>
     </app-card>
   </div>
 
-  <app-button size="md" suffixIcon="ph-copy" (click)="copyToClipboard()">Copy Code</app-button>
-  <div class="flex gap-4 w-full">
-    <app-button size="md" [variant]="'tertiary'" prefixIcon="ph-caret-left" (click)="backToTabs()"
-      >Back to tabs
-    </app-button>
-    <app-button size="md" [variant]="'tertiary'" suffixIcon="ph-download" (click)="goToImport()"
-      >Go to import
-    </app-button>
+  <div class="flex justify-between mt-6 w-full">
+    <div class="w-64">
+      <app-button size="md" [variant]="'tertiary'" prefixIcon="ph-caret-left" (click)="backToTabs()"
+        >Back to tabs
+      </app-button>
+    </div>
+    <div class="w-64">
+      <app-button size="md" suffixIcon="ph-copy" (click)="copyToClipboard()">Copy Code</app-button>
+    </div>
   </div>
   <span
     class="p-4 fixed top-6 right-6 rounded-xl bg-emerald-500 text-xl text-white font-semibold toast"

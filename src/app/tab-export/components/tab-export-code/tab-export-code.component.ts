@@ -38,8 +38,4 @@ export class TabExportCodeComponent {
       this.copied.set(false);
     }, COPY_TIMEOUT);
   }
-
-  goToImport(): void {
-    this.router.navigate(['/', AppRoutesPaths.IMPORT]);
-  }
 }

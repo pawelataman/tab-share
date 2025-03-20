@@ -1,60 +1,17 @@
-<div class="h-full w-full flex flex-col justify-center items-center gap-8 p-4">
-  <div class="flex flex-col items-center gap-8 justify-center">
+<div class="h-full w-full flex flex-col justify-between items-center gap-8 p-4 relative">
+  <div class="flex flex-col items-center gap-2 justify-center">
     <div class="p-4 rounded-full bg-indigo-500/20 border-2 border-slate-500/10 w-max-content">
       <i class="ph-bold ph-download text-6xl text-indigo-400"></i>
     </div>
     <h1 class="text-white font-semibold text-4xl text-center">Import your tabs</h1>
     <h2 class="text-slate-500 text-xl text-center">Enter the export code to restore your saved tabs</h2>
   </div>
-  <div class="grow flex flex-col items-center justify-center w-full gap-4 overflow-hidden">
-    @if (!$importedTabs().length) {
-      <div class="flex flex-col items-center gap-4">
-        <code-input
-          [initialFocusField]="0"
-          [isCodeHidden]="false"
-          [isCharsCode]="true"
-          [code]="code()"
-          [codeLength]="CODE_LENGTH"
-          (codeChanged)="onCodeChanged($event)">
-        </code-input>
-        <span class="text-slate-500 text-xl text-center"
-          >The code can be found on the device where you exported your tabs</span
-        >
 
-        <div class="flex flex-row gap-4">
-          <div class="grow">
-            <app-button [variant]="'tertiary'" suffixIcon="ph-clipboard-text" (click)="clipboard()">Paste</app-button>
-          </div>
-          <div class="grow">
-            <app-button variant="primary" suffixIcon="ph-download" [disabled]="!$canImport()" (click)="import()"
-              >Import tabs
-            </app-button>
-          </div>
-        </div>
-      </div>
+  <div class="grow w-full overflow-hidden">
+    @if (!$importedTabs().length) {
+      <app-tab-import-code (submit)="importTabs($event)" />
     } @else {
-      <div class="w-full flex justify-between items-end">
-        <span class="text-indigo-100 text-2xl">Preview</span>
-        <div class="px-4 py-2 bg-indigo-500/10 text-indigo-100 text-2xl rounded-xl">
-          {{ $importedTabs().length }}
-          tabs
-        </div>
-      </div>
-      <div class="flex h-full flex-col w-full gap-2 overflow-auto">
-        @for (tab of $importedTabs(); track $index) {
-          <app-tab-list-item [tab]="tab" />
-        }
-      </div>
-      <div class="w-full flex gap-4 justify-between">
-        <div class="w-64">
-          <app-button [variant]="'tertiary'" suffixIcon="ph-upload" (click)="goToExport()">Go to export</app-button>
-        </div>
-        <div class="w-76">
-          <app-button [variant]="'primary'" suffixIcon="ph-monitor-arrow-up" (click)="openTabs()"
-            >Open {{ $importedTabs().length }} tabs
-          </app-button>
-        </div>
-      </div>
+      <app-tab-import-preview [importedTabs]="$importedTabs()" (open)="openTabs()" />
     }
   </div>
 </div>

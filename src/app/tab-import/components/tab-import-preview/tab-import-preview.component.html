@@ -1,0 +1,19 @@
+<div class="w-full flex justify-between items-end">
+  <span class="text-indigo-100 text-2xl">Preview</span>
+  <div class="px-4 py-2 bg-indigo-500/10 text-indigo-100 text-2xl rounded-xl">
+    {{ importedTabs().length }}
+    tabs
+  </div>
+</div>
+<div class="flex h-full flex-col w-full gap-2 overflow-auto">
+  @for (tab of importedTabs(); track $index) {
+    <app-tab-list-item [tab]="tab" />
+  }
+</div>
+<div class="w-full flex gap-4 justify-between">
+  <div class="w-76">
+    <app-button [variant]="'primary'" suffixIcon="ph-monitor-arrow-up" (click)="openTabs()"
+      >Open {{ importedTabs().length }} tabs
+    </app-button>
+  </div>
+</div>

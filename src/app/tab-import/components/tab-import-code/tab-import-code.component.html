@@ -1,0 +1,32 @@
+<div class="flex w-full h-full flex-col justify-between items-center gap-4">
+  <div class="flex flex-col items-center gap-4 mt-16">
+    <code-input
+      [initialFocusField]="0"
+      [isCodeHidden]="false"
+      [isCharsCode]="true"
+      [code]="$code()"
+      [codeLength]="CODE_LENGTH"
+      (codeChanged)="onCodeChanged($event)">
+    </code-input>
+
+    <span class="text-slate-500 text-xl text-center"
+      >The code can be found on the device where you exported your tabs</span
+    >
+    <div class="w-64">
+      <app-button [variant]="'tertiary'" suffixIcon="ph-clipboard-text" (click)="clipboard()">Paste</app-button>
+    </div>
+  </div>
+
+  <div class="flex w-full justify-between">
+    <div class="w-64">
+      <app-button size="md" [variant]="'tertiary'" prefixIcon="ph-caret-left" (click)="home()">Home</app-button>
+    </div>
+    <div class="flex gap-4">
+      <div class="w-64">
+        <app-button variant="primary" suffixIcon="ph-download" [disabled]="!$isValid()" (click)="submitCode()"
+          >Import tabs
+        </app-button>
+      </div>
+    </div>
+  </div>
+</div>
