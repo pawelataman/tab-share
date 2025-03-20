@@ -1,6 +1,7 @@
 import { Component, computed, input } from '@angular/core';
-import { Toast, TOAST_STYLE_MAP } from '../../../../state/core.models';
+import { Toast } from '../../../../state/core.models';
 import { NgStyle } from '@angular/common';
+import { TOAST_STYLE_MAP } from '../../../../state/core.consts';
 
 @Component({
   selector: 'app-toast',

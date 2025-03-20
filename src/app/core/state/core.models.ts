@@ -25,22 +25,3 @@ export interface ToastStyle {
   color: string;
   icon: string;
 }
-
-export const TOAST_STYLE_MAP: { [P in ToastType]: ToastStyle } = {
-  error: {
-    icon: 'ph-x-circle',
-    color: '#ef4444',
-  },
-  info: {
-    icon: 'ph-info',
-    color: 'white',
-  },
-  success: {
-    icon: 'ph-check-circle',
-    color: '#84cc16',
-  },
-  warning: {
-    icon: 'ph-warning',
-    color: '#eab308',
-  },
-};
