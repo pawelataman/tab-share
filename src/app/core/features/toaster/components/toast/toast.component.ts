@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { Toast } from '../../../../state/core.models';
 import { NgStyle } from '@angular/common';
 import { TOAST_STYLE_MAP } from '../../../../state/core.consts';
@@ -13,4 +13,5 @@ export class ToastComponent {
   $toastStyle = computed(() => {
     return TOAST_STYLE_MAP[this.toast().type];
   });
+  close = output<void>();
 }

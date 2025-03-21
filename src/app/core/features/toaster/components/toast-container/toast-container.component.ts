@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ToastService } from '../../services/toast.service';
 import { ToastComponent } from '../toast/toast.component';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { Toast } from '../../../../state/core.models';
 
 @Component({
   selector: 'app-toast-container',
@@ -18,5 +19,10 @@ import { animate, style, transition, trigger } from '@angular/animations';
   ],
 })
 export class ToastContainerComponent {
-  $toasts = inject(ToastService).$displayToasts;
+  private toastService = inject(ToastService);
+  $toasts = this.toastService.$displayToasts;
+
+  closeToast(toast: Toast): void {
+    this.toastService.removeToast(toast);
+  }
 }
