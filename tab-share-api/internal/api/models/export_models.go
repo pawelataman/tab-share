@@ -11,5 +11,5 @@ type ExportRequest struct {
 }
 
 type ExportResponse struct {
-	Code string `json:"code" validate:"required,min=6,max=6"`
+	Code string `json:"code"`
 }
