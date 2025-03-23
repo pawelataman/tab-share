@@ -9,3 +9,7 @@ type ExportTab struct {
 type ExportRequest struct {
 	Tabs []ExportTab `json:"tabs" validate:"required,dive"`
 }
+
+type ExportResponse struct {
+	Code string `json:"code" validate:"required,min=6,max=6"`
+}

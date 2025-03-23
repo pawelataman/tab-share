@@ -27,10 +27,10 @@ func (t *transactionManager) CreateTransaction(ctx context.Context) ITransaction
 }
 
 type ITransaction interface {
-	begin(ctx context.Context) error
-	Execute(ctx context.Context, fn func(tx pgx.Tx) error) error
-	commit(ctx context.Context) error
-	rollback(ctx context.Context) error
+	begin() error
+	Execute(fn func(tx pgx.Tx, ctx context.Context) error) error
+	commit() error
+	rollback() error
 }
 
 type transaction struct {
@@ -39,8 +39,8 @@ type transaction struct {
 	tx   pgx.Tx
 }
 
-func (t *transaction) begin(ctx context.Context) error {
-	tx, err := t.pool.Begin(ctx)
+func (t *transaction) begin() error {
+	tx, err := t.pool.Begin(t.ctx)
 	if err != nil {
 		return err
 	}
@@ -48,31 +48,32 @@ func (t *transaction) begin(ctx context.Context) error {
 	return nil
 }
 
-func (t *transaction) commit(ctx context.Context) error {
+func (t *transaction) commit() error {
 	if t.tx == nil {
 		return fmt.Errorf("transaction does not exist")
 	}
-	return t.tx.Commit(ctx)
+	return t.tx.Commit(t.ctx)
 }
 
-func (t *transaction) rollback(ctx context.Context) error {
+func (t *transaction) rollback() error {
 	if t.tx == nil {
 		return fmt.Errorf("transaction does not exist")
 	}
-	return t.tx.Rollback(ctx)
+	return t.tx.Rollback(t.ctx)
 }
 
-func (t *transaction) Execute(ctx context.Context, fn func(tx pgx.Tx) error) error {
-	if err := t.begin(ctx); err != nil {
+func (t *transaction) Execute(fn func(tx pgx.Tx, ctx context.Context) error) error {
+	if err := t.begin(); err != nil {
 		slog.Error("could not start transaction", err.Error())
 		return err
 	}
-	if err := fn(t.tx); err != nil {
+
+	if err := fn(t.tx, t.ctx); err != nil {
 		slog.Error("transaction failed", err.Error())
-		if rollErr := t.rollback(ctx); rollErr != nil {
+		if rollErr := t.rollback(); rollErr != nil {
 			slog.Error("rolling back error", rollErr)
 		}
 		return err
 	}
-	return t.commit(ctx)
+	return t.commit()
 }
