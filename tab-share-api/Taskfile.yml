@@ -1,0 +1,37 @@
+version: '3'
+
+dotenv: ['.env']
+
+vars:
+  DB_URL: postgres://{{.DB_USERNAME}}:{{.DB_PASSWORD}}@{{.DB_HOST}}:{{.DB_PORT}}/{{.DB_DATABASE}}?sslmode=disable&search_path={{.DB_SCHEMA}}
+  MIGRATION_DIR: ./internal/database/migrations
+
+env:
+  GOOSE_DRIVER: postgres
+  GOOSE_DBSTRING: "{{.DB_URL}}"
+
+tasks:
+
+  migration:
+    cmds:
+      - goose create {{.NAME}} sql -dir {{.MIGRATION_DIR}}
+
+  upgrade:
+    cmds:
+      - goose up -dir {{.MIGRATION_DIR}}
+
+  downgrade:
+    cmds:
+      - goose down -dir {{.MIGRATION_DIR}}
+
+  status:
+    cmds:
+      - goose status -dir {{.MIGRATION_DIR}}
+
+  generate:
+    cmds:
+      - sqlc generate
+
+  compose:
+    cmds:
+      - docker compose up --build
