@@ -2,9 +2,10 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { CoreFacade } from '../state/core.facade';
 import { defer, finalize, Observable } from 'rxjs';
+import { environments } from '../../../environments/environment';
 
 export class BaseHttpService {
-  protected BASE_URL = 'http://localhost:8080';
+  protected BASE_URL = environments.API_URL;
   protected httpClient = inject(HttpClient);
   protected coreFacade = inject(CoreFacade);
 
