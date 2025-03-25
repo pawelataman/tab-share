@@ -12,14 +12,14 @@ func NewImportHandler(params RouteHandlerParams) *RouteHandler {
 	handler := &RouteHandler{
 		db: params.Db,
 	}
-	params.App.Get("/import/:code", handler.handleImportTabs)
+	params.App.Get("/import", handler.handleImportTabs)
 	return handler
 }
 
 func (h *RouteHandler) handleImportTabs(c *fiber.Ctx) error {
 	var params models.ImportTabsQueryParams
 
-	if err := validation.ParseParams(c, &params); err != nil {
+	if err := validation.ParseQuery(c, &params); err != nil {
 		return err
 	}
 
@@ -27,7 +27,7 @@ func (h *RouteHandler) handleImportTabs(c *fiber.Ctx) error {
 	code, err := h.db.Queries.SelectCode(c.Context(), params.Code)
 
 	if err != nil {
-		return errors.NewApiErr(fiber.StatusNotFound, fmt.Errorf("code not found"))
+		return errors.NewApiErr(fiber.StatusNotFound, fmt.Errorf(errors.CodeNotFound))
 	}
 
 	// select tabs by code id

@@ -1,7 +1,6 @@
 package validation
 
 import (
-	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"log/slog"
 	"tab-share.com/internal/api/errors"
@@ -27,7 +26,7 @@ func ParseQuery[T interface{}](c *fiber.Ctx, target *T) error {
 func ParseParams[T interface{}](c *fiber.Ctx, target *T) error {
 	// parsing
 	if err := c.ParamsParser(target); err != nil {
-		return errors.NewApiErr(fiber.StatusBadRequest, fmt.Errorf("parse error"))
+		return fiber.ErrBadRequest
 	}
 	return modAndValidate(c, target)
 }

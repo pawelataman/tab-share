@@ -11,6 +11,9 @@ env:
   GOOSE_DBSTRING: "{{.DB_URL}}"
 
 tasks:
+  watch:
+    cmds:
+      - air
 
   migration:
     cmds:
