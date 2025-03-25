@@ -14,8 +14,8 @@
     "clipboardWrite"
   ],
   "host_permissions": [
-    "http://*/*",
-    "https://*/*"
+    "http://localhost:8080/*",
+    "https://ataman.cloud/*"
   ],
   "action": {
     "default_popup": "index.html"
