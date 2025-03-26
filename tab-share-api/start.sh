@@ -1,0 +1,1 @@
+./migrate.sh && ./build/tab-share-api

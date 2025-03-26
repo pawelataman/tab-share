@@ -5,7 +5,7 @@ COPY go.mod go.sum ./
 RUN go mod download
 RUN go install github.com/pressly/goose/v3/cmd/goose@latest
 COPY . .
-RUN chmod +x ./migrate.sh
+RUN chmod +x ./migrate.sh ./start.sh
 RUN CGO_ENABLED=0 GOOS=linux go build -o ./build/tab-share-api ./cmd/main.go
 EXPOSE 8080
-CMD ["./migrate.sh","./build/tab-share-api"]
+CMD ["/bin/bash","-c","./start.sh"]
