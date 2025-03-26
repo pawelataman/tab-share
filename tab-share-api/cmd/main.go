@@ -26,7 +26,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("could not init db %v", err)
 	}
-
 	if err = db.Ping(ctx); err != nil {
 		log.Fatalf("could not ping db %v", err)
 	}
