@@ -1,7 +1,5 @@
 -- +goose Up
 -- +goose StatementBegin
-CREATE DATABASE IF NOT EXISTS "tab-share-api-db";
-
 CREATE TABLE IF NOT EXISTS "export_codes" (
     "id" SERIAL PRIMARY KEY NOT NULL,
     "code" VARCHAR(255) UNIQUE NOT NULL
@@ -28,5 +26,4 @@ CREATE TABLE IF NOT EXISTS "export_tabs"
 DROP TABLE "export_tabs";
 DROP TABLE "tabs";
 DROP TABLE "export_codes";
-DROP DATABASE "tab-share-api-db";
 -- +goose StatementEnd
