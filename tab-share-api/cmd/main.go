@@ -8,7 +8,6 @@ import (
 	"github.com/joho/godotenv"
 	"log"
 	"os/signal"
-	"strconv"
 	"syscall"
 	"tab-share.com/internal/api/handlers"
 	"tab-share.com/internal/api/validation"
@@ -47,8 +46,7 @@ func main() {
 	done := make(chan bool, 1)
 
 	go func(appConfig config.AppConfig) {
-		port, _ := strconv.Atoi(appConfig.AppPort)
-		err := app.Listen(fmt.Sprintf(":%d", port))
+		err := app.Listen(":8080")
 		if err != nil {
 			panic(fmt.Sprintf("http server error: %s", err))
 		}
