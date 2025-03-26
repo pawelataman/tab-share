@@ -8,4 +8,4 @@ COPY . .
 RUN chmod +x ./migrate.sh
 RUN CGO_ENABLED=0 GOOS=linux go build -o ./build/tab-share-api ./cmd/main.go
 EXPOSE 8080
-CMD ["./build/tab-share-api"]
+CMD ["./migrate.sh","./build/tab-share-api"]
