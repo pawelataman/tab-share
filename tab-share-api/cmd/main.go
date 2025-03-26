@@ -19,7 +19,7 @@ import (
 
 func main() {
 	ctx := context.Background()
-	godotenv.Load()
+	_ = godotenv.Load()
 	cfg := config.New()
 	db, err := database.CreateDatabase(ctx, cfg)
 
