@@ -1,8 +1,8 @@
-import { Component, input } from '@angular/core';
+import {Component, input} from '@angular/core';
 
 export interface TabListItem {
   url: string;
-  favIconUrl: string;
+  favIconUrl?: string;
   name: string;
 }
 

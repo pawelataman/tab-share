@@ -5,9 +5,9 @@
   <div class="flex flex-row gap-6 items-center overflow-hidden">
     <ng-content select="[prefix]"></ng-content>
     @if (tab().favIconUrl) {
-      <img [src]="tab().favIconUrl" class="h-8 w-8"/>
+      <img alt="Favicon" [src]="tab().favIconUrl" class="h-8 w-8"/>
     } @else {
-      <i class="ph ph-globe text-4xl text-slate-500"></i>
+      <i class="ph-bold ph-globe text-4xl text-slate-500"></i>
     }
     <div>
       <div class="text-2xl font-semibold text-white whitespace-nowrap">{{ tab().name }}</div>
