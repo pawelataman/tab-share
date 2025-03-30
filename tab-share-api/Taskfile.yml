@@ -1,9 +1,9 @@
 version: '3'
 
-dotenv: ['.env']
+dotenv: [ '.env' ]
 
 vars:
-  DB_URL: postgres://{{.DB_USERNAME}}:{{.DB_PASSWORD}}@{{.DB_HOST}}:{{.DB_PORT}}/{{.DB_DATABASE}}?sslmode=disable&search_path={{.DB_SCHEMA}}
+  DB_URL: postgres://{{.DB_USERNAME}}:{{.DB_PASSWORD}}@localhost:5432/{{.DB_NAME}}?sslmode=disable&search_path=public
   MIGRATION_DIR: ./internal/database/migrations
 
 env:

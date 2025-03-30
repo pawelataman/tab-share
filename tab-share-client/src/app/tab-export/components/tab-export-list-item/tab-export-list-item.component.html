@@ -1,24 +1,3 @@
-<!--<div-->
-<!--  class="flex group flex-row items-center gap-4 px-6 py-2 rounded-xl cursor-pointer relative border-2 border-slate-800 bg-slate-900 transition-all duration-300 hover:border-indigo-500/50 hover:shadow-lg hover:shadow-indigo-500/10 hover:ring hover:ring-indigo-500/50"-->
-<!--  [ngClass]="{-->
-<!--    'opacity-30': excluded(),-->
-<!--  }">-->
-<!--  <div-->
-<!--    class="absolute inset-0 bg-gradient-to-br from-indigo-600/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>-->
-<!--  <div class="flex flex-row gap-6 items-center overflowden">-->
-<!--    @if (!excluded()) {-->
-<!--      <i class="ph-bold ph-check text-indigo-400 text-2xl"></i>-->
-<!--    } @else {-->
-<!--      <i class="ph-bold ph-x text-indigo-400 text-2xl"></i>-->
-<!--    }-->
-<!--    <img [src]="tab().favIconUrl" class="h-8 w-8" />-->
-<!--    <div>-->
-<!--      <div class="text-2xl font-semibold text-white whitespace-nowrap">{{ tab().title }}</div>-->
-<!--      <div class="text-xl w-full text-gray-300 whitespace-nowrap">{{ tab().url }}</div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
 <div [ngClass]="{ 'opacity-30': excluded() }">
   <app-tab-list-item [tab]="$tabListItem()">
     <div prefix>

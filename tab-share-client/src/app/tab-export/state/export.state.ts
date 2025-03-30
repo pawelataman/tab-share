@@ -1,13 +1,14 @@
-import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
-import { ChromeFacade } from '../../core/services/chrome-facade';
-import { computed, inject } from '@angular/core';
-import { DESIRED_URL_PREFIXES } from '../../core/state/core.consts';
-import { ExcludedTabs, ExportState, ExportTabsRequest } from './export.models';
-import { pipe, switchMap } from 'rxjs';
-import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { ExportHttpService } from '../services/export-http.service';
-import { tapResponse } from '@ngrx/operators';
-import { Router } from '@angular/router';
+import {patchState, signalStore, withComputed, withMethods, withState} from '@ngrx/signals';
+import {ChromeFacade} from '../../core/services/chrome-facade';
+import {computed, inject} from '@angular/core';
+import {DESIRED_URL_PREFIXES} from '../../core/state/core.consts';
+import {ExcludedTabs, ExportState, ExportTabsRequest} from './export.models';
+import {pipe, switchMap} from 'rxjs';
+import {rxMethod} from '@ngrx/signals/rxjs-interop';
+import {ExportHttpService} from '../services/export-http.service';
+import {tapResponse} from '@ngrx/operators';
+import {Router} from '@angular/router';
+import {ToastService} from '../../core/features/toaster/services/toast.service';
 
 const INITIAL_STATE: ExportState = {
   excludedTabs: {},
@@ -15,7 +16,7 @@ const INITIAL_STATE: ExportState = {
   exportCode: '',
 };
 export const ExportStore = signalStore(
-  { providedIn: 'root' },
+  {providedIn: 'root'},
   withState<ExportState>(INITIAL_STATE),
   withComputed(store => ({
     validTabs: computed(() =>
@@ -25,30 +26,35 @@ export const ExportStore = signalStore(
   })),
   withMethods(store => {
     const httpService = inject(ExportHttpService);
+    const toastService = inject(ToastService);
     const chromeFacade = inject(ChromeFacade);
     const router = inject(Router);
     return {
       setExcludedTabs: (excludedTabs: ExcludedTabs) => {
-        patchState(store, { excludedTabs: excludedTabs });
+        patchState(store, {excludedTabs: excludedTabs});
       },
       exportTabs: rxMethod<ExportTabsRequest>(
         pipe(
-          switchMap(request => httpService.exportTabs(request)),
-          tapResponse(
+          switchMap(request => httpService.exportTabs(request).pipe(tapResponse(
             response => {
-              patchState(store, { exportCode: response.code });
+              patchState(store, {exportCode: response.code});
               router.navigate(['export', 'code']);
             },
             error => {
-              console.error(error);
+              toastService.pushToast({
+                message: 'Could not export tabs',
+                id: Date.now().toString(),
+                type: 'error',
+              });
             }
-          )
+          ))),
         )
       ),
       resetState: () => patchState(store, INITIAL_STATE),
       loadTabs: async () => {
         const currentWindowTabs = await chromeFacade.getCurrentWindowTabs();
-        patchState(store, { currentWindowTabs });
+        console.log(currentWindowTabs)
+        patchState(store, {currentWindowTabs});
       },
     };
   })

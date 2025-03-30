@@ -1,4 +1,4 @@
-import { ChromeTabWithId } from '../../core/state/core.models';
+import {ChromeTabWithId} from '../../core/state/core.models';
 
 export type ExportState = {
   excludedTabs: ExcludedTabs;
@@ -9,7 +9,7 @@ export type ExportState = {
 export type ExportTab = {
   url: string;
   name: string;
-  favIconUrl: string;
+  favIconUrl?: string;
 };
 
 export type ExcludedTabs = { [key: string]: boolean };
