@@ -53,7 +53,7 @@
                 }
               },
               "extractLicenses": false,
-              "sourceMap": false,
+              "sourceMap": true,
               "prerender": false,
               "ssr": false,
               "budgets": [
