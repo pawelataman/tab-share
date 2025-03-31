@@ -42,6 +42,7 @@ func main() {
 		App: app,
 	})
 
+	app.Use(middlewares.HandleRouteNotFound)
 	validation.InitTranslator()
 
 	done := make(chan bool, 1)
